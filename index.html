@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Meshnet : Practical Guide</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+
+				<section>
+
+					<h1>MESH NETWORK</h1>
+					<h2>A Practical Guide</h2>
+
+					<p>
+					<small>Created by <a href="https://github.com/suriyadeepan"> Suriyadeepan</a> and <a href="https://github.com/vanangamudi">  Selva Kumar</a></small>
+					</p>
+
+
+
+				</section>
+
+				<section> <h1>Routing</h1> </section>
+
+<!--					<li class="fragment">Routing</p>
+					<li class="fragment">Openwrt</p>
+					<li class="fragment">Ping Tests</p>
+					<li class="fragment">DNS and IP</p>
+					<li class="fragment">P2P Applications</p>
+					<li class="fragment">Use Cases</p>
+					<li class="fragment">Principles</p>
+
+				</section>
+-->
+
+				<section data-markdown>
+					<script type="text/template">
+
+## Protocols
+
+* [Babel](https://www.irif.univ-paris-diderot.fr/~jch/software/babel/)
+* [BATMAN](https://www.open-mesh.org/projects/open-mesh/wiki/BATMANConcept)
+* [OLSR](http://www.olsr.org/mediawiki/index.php/Main_Page)
+* [BMX6](http://bmx6.net/projects/bmx6)
+
+
+					</script>
+				</section>
+
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## BABEL
+
+loras ipsum. hipster hispanic.
+loras ipsum. hipster hispanic.
+loras ipsum. hipster hispanic.
+
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## B.A.T.M.A.N
+
+loras ipsum. hipster hispanic.
+loras ipsum. hipster hispanic.
+loras ipsum. hipster hispanic.
+
+
+
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+## OLSR
+
+loras ipsum. hipster hispanic.
+loras ipsum. hipster hispanic.
+loras ipsum. hipster hispanic.
+
+
+
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+## BMX6
+
+loras ipsum. hipster hispanic.
+loras ipsum. hipster hispanic.
+loras ipsum. hipster hispanic.
+
+
+
+						</script>
+					</section>
+				</section>
+
+
+
+				<section> <h1>Advantages</h1> </section>
+
+				<section>
+
+					<section> <h2>BABEL</h2>
+						loras ipsum. hipster hispanic.
+						loras ipsum. hipster hispanic.
+						loras ipsum. hipster hispanic.
+					</section>
+					<section> <h2>B.A.T.M.A.N.</h2>
+						loras ipsum. hipster hispanic.
+						loras ipsum. hipster hispanic.
+						loras ipsum. hipster hispanic.
+					</section>
+					<section> <h2>OLSR</h2>
+						loras ipsum. hipster hispanic.
+						loras ipsum. hipster hispanic.
+						loras ipsum. hipster hispanic.
+					</section>
+					<section> <h2>BMX6</h2>
+						loras ipsum. hipster hispanic.
+						loras ipsum. hipster hispanic.
+						loras ipsum. hipster hispanic.
+					</section>
+
+				</section>
+
+
+				<section> <h1>Disadvantages</h1> </section>
+
+				<section>
+
+					<section> <h2>BABEL</h2>
+						loras ipsum. hipster hispanic.
+						loras ipsum. hipster hispanic.
+						loras ipsum. hipster hispanic.
+					</section>
+					<section> <h2>B.A.T.M.A.N.</h2>
+						loras ipsum. hipster hispanic.
+						loras ipsum. hipster hispanic.
+						loras ipsum. hipster hispanic.
+					</section>
+					<section> <h2>OLSR</h2>
+						loras ipsum. hipster hispanic.
+						loras ipsum. hipster hispanic.
+						loras ipsum. hipster hispanic.
+					</section>
+					<section> <h2>BMX6</h2>
+						loras ipsum. hipster hispanic.
+						loras ipsum. hipster hispanic.
+						loras ipsum. hipster hispanic.
+					</section>
+
+				</section>
+
+				<section><h1>Implementation</h1></section>
+
+				<section>
+					<section><h2>batman-adv</h2> <br>
+						<ul>
+						<li>Implemented as a linux kernel module </li><br>
+							<li>Operates on layer 2 of network stack</li>
+						</ul>
+					</section>
+					<section><h2>batman-adv</h2><br>
+						<ul>
+							<li>All the packets are encapsulated and routed by <strong>batman-adv</strong></li><br>
+							<li>All the participating nodes appear to be link-local</li>
+						</ul>
+					</section>
+					<section><h2>batman-adv</h2><br>
+						<ul>
+							<li>Supports anything on top of layer 2 : <strong>IPV4, IPV6, DHCP, IPX</strong></li><br>
+							<li>Nodes can participate in a mesh without having an IP</li><br>
+							<li>Easy integration of non-mesh clients (think Android)</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section><h2>batctl</h2> <br>
+						<ul>
+						<li>A tool to configure and debug the batman-adv kernel module</li><br>
+						<li>Interface to settings and status information of batman-adv</li><br>
+							<li>Provides a layer-2 version of ping, traceroute and tcpdump(MAC)</li>
+						</ul>
+					</section>
+					<section><h2>Configuration</h2><br>
+						<ul>
+							<li>Add and remove interfaces to the mesh network</li><br>
+							<li>Set or change parameters of batman-adv module</li><br>
+							<li>Enable or disable features of batman-adv</li>
+						</ul>
+					</section>
+					<section><h2>batctl</h2><br>
+						<ul>
+							<li>Get the list of mesh nodes and non-mesh nodes in the network</li><br>
+							<li>Log messages from batman-adv</li><br>
+							<li>List of available gateways</li>
+						</ul>
+					</section>
+				</section>
+
+				<section><h1>Compilation</h1></section>
+
+				<section>
+					<section><h2>Compatibility Check</h2> <br>
+						Before compiling batman-adv or batctl find the versions compatible with your kernel.
+					</section>
+					<section>
+					<h2>Kernel Version</h2>
+					<pre><code class="bash" data-trim contenteditable style="font-size: 18px;">
+					uname -r # 3.19.0-25-generic
+					</code></pre>
+				</section>
+				<section><h2>Find compatible versions</h2>
+					<a href="https://www.open-mesh.org/projects/open-mesh/wiki/Download">From here</a>
+					<img data-src="res/compat.png" width=800 height=500>
+					</section>
+					
+					<section><h2>Dowload</h2>
+						<a href="https://downloads.open-mesh.org/batman/releases/">Download batclt and batman-adv</a>
+					</section>
+
+					<!--<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom"><h2>Compile batman-adv</h2>-->
+					<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom"><h2>Compile batman-adv</h2>
+					<pre><code class="bash" data-trim contenteditable style="font-size: 18px;">
+# compile
+make -j4
+# find module
+ls *.ko
+# insert module
+sudo insmod batman-adv.ko
+# check version
+batctl -v
+					</code></pre>
+					</section>
+
+					<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom"><h2>Compile batctl</h2>
+					<pre><code class="bash" data-trim contenteditable style="font-size: 18px;">
+# compile
+make -j4
+# install
+sudo make install
+# check version
+batctl -v
+					</code></pre>
+					</section>
+
+
+				</section>
+
+				<section><h1>Openwrt</h1> </section>
+
+				<section>
+					<section><h2>Compatibility Check</h2>
+						<a href="https://wiki.openwrt.org/toh/start">Table of Hardware</a>
+						<img data-src="res/toh.png" height=400 width=800>
+					</section>
+
+					<section><h2>Bridge</h2>
+						<p>Need to bridge Adhoc and Infrastructure APs</p> 
+						<p>To let non-mesh nodes (think Android) connect to the network</p>
+					</section>
+
+				</section>
+
+<!--DNS & IP : STARTS HERE -->
+<section><h1>IP & DNS</h1> </section>
+<section>
+	<section><h2>IP Allocation. How? </h2><br>
+		<ol>
+			<li><b>Static IP</b><br>Manually setting a static IP address</li><br>
+				<li><b>DHCP</b><br>OpenWrt comes with DHCP server</li>
+		</ol>
+	</section>
+
+	<section>
+		<h2>Configuring DHCP</h2><br>
+		<ul><li>Go to <em>/etc/config/dhcp	</em></li>
+			<li><strong>start</strong> : start address</li>
+			<li><strong>limit</strong> : number of devices to serve</li>
+		</ul>
+	</section>
+	<section>
+		<h3>/etc/config/dhcp</h3><br>
+		<pre><code class="bash" data-trim contenteditable style="font-size: 18px;">
+config dhcp 'lan'
+      option interface 'lan'
+      option start '100'
+      option limit '100'
+      option leasetime '12h'
+		</code></pre><br>
+
+		<h3>/etc/config/network</h3><br>
+		<pre><code class="bash" data-trim contenteditable style="font-size: 18px;">
+config interface 'lan'
+    option ipaddr '192.168.1.1'
+    option netmask '255.255.255.0'
+		</code></pre>
+
+	</section>
+
+</section>
+
+<section>
+	<section><h2>What is DNS? </h2><br>
+		<ul>
+			<li>Domain Name Server</li><br>
+			<li>Human readable names for services</li>
+		</ul>
+	</section>
+	<section><h2>How does it work?</h2><br>
+		<ol>
+			<li>The browser talks to the DNS server, asks for name resolution</li><br>
+			<li>DNS maintains the mapping between name to IP address</li> <br>
+			<li>DNS server looks in its map and reponds with the IP address</li>
+		</ol>
+	</section>
+	<section><h2>How do we do it?</h2><br>
+		OpenWRT comes with a DNS utility called <strong>Dnsmasq</strong>.<br><br>
+		It can be configured through the <strong>LUCI</strong> interface.
+	</section>
+	<section><h2>Dnsmasq Configuration</h2><br>
+		<ol>
+			<li>Find the IP address allocated to your laptop; say <strong>192.168.1.162</strong></li><br>
+			<li>To add a mapping entry, log in to the router, via ssh</li><br>
+			<li>Create a new file under directory /etc/, <em>"hosts.pymesh"</em></li><br>
+			<li>add the following line to the file</em></li>
+		</ol>
+		<pre><code class="bash" data-trim contenteditable style="font-size: 18px;"> 192.168.1.162 pymesh.p2p</code></pre>
+	</section>
+	<section><h2>Dnsmasq Configuration</h2><br>
+		<ol>
+			<li>Log into the router, via browser</li><br>
+			<li>Go to DHCP and DNS configuration page, In the top menu click Network -> DHCP and DNS.</li><br>
+			<li>In the Additional Hosts Files field(highlighted in the figure below) add the name of the file which we have created above.</li><br>
+			<li>Click Save & Apply</li>
+		</ol>
+	</section>
+
+	<section><h2>Dnsmasq Configuration</h2><br>
+		<img data-src="res/dns.png">
+	</section>
+</section>
+	
+<!--DNS & IP : ENDS HERE   -->
+
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'concave', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
