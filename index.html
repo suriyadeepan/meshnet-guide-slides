@@ -288,6 +288,77 @@ batctl -v
 
 				</section>
 
+
+				<!-- Bridging starts here -->
+				<section><h1>Quick Node setup</h1></section>
+				<section>
+
+					<section><h2>Add Interface</h2>
+						<p>Which interface to add to batman-adv to build the mesh network?</p>
+						<pre><code class="bash" data-trim contenteditable style="font-size: 18px;">
+# Add an interface wlan0/eth0
+batctl if add wlan0
+# check interface
+batctl if
+						</code></pre>
+					</section>
+
+					<section><h2>bat0 : Virtual Interface</h2>
+ Any packet that enters this interface will be examined by the batman-adv for its destination mac-adress and will be forwarded.
+ <img data-src="res/bat0.png">
+					</section>
+
+					<section><h2>Simple Mesh Network</h2>
+						<pre><code class="bash" data-trim contenteditable style="font-size: 18px;">
+# kill network manager
+sudo service network-manager stop
+# load the module up
+modprobe batman-adv
+# setup network interfaces
+ip link set up dev eth0
+# set mtu compatible with batman
+ip link set mtu 1532 dev wlan0
+# configure the wlan interface to operate with mtus of 1532
+#		(batman requires it) and turn enc off 
+iwconfig wlan0 mode ad-hoc channel 6 essid PYMESH ap 02:12:34:56:78:9A enc off
+# add wlan0 to the batman-adv virtual interface
+# 	(so it can communicate with other batman-adv nodes)
+batctl if add wlan0
+# bringing up wireless ad-hoc interface
+ifconfig wlan0 up
+# bringing up bat0 interface
+ifconfig bat0 192.168.1.4 up
+						</code></pre>
+					</section>
+
+					<section><h2>How to kill BATMAN?</h2>
+						<pre><code class="bash" data-trim contenteditable style="font-size: 18px;">
+# disable kernel module
+rmmod batman-adv
+# restart network manager
+service network-manager restart
+					</pre></code>
+				</section>
+
+					<section><h2>Bridge</h2>
+						<p>Need to bridge Adhoc and Infrastructure APs</p> 
+						<p>To let non-mesh nodes (think Android) connect to the network</p>
+					</section>
+					<section><h2>Setup Bridge Interface</h2>
+						<pre><code class="bash" data-trim contenteditable style="font-size: 18px;">
+ip link add name mesh-bridge type bridge
+ip link set dev eth0 master mesh-bridge
+ip link set dev bat0 master mesh-bridge
+ip link set up dev eth0
+ip link set up dev bat0
+ip link set up dev mesh-bridge
+					</pre></code>
+				</section>
+
+				</section>
+
+				<!-- Bridging ends here  -->
+
 				<section><h1>Openwrt</h1> </section>
 
 				<section>
@@ -296,9 +367,9 @@ batctl -v
 						<img data-src="res/toh.png" height=400 width=800>
 					</section>
 
-					<section><h2>Bridge</h2>
-						<p>Need to bridge Adhoc and Infrastructure APs</p> 
-						<p>To let non-mesh nodes (think Android) connect to the network</p>
+					<section><h2>Compiled Packages</h2>
+						<a href="https://downloads.openwrt.org/">downloads.openwrt.org/</a>
+						<img data-src="res/compiled.png" width=800 height=500>
 					</section>
 
 				</section>
@@ -384,6 +455,93 @@ config interface 'lan'
 	
 <!--DNS & IP : ENDS HERE   -->
 
+<!-- P2P Apps : STARTS HERE -->
+<section><h1>P2P Apps</h1></section>
+<section>
+
+	<section><h2>Use Cases</h2><br>
+		<ul>
+			<li>Chat</li><br>
+			<li>Voice Call</li><br>
+			<li>Social Networking</li><br>
+			<li>Micro-blogging</li><br>
+			<li>File Sharing</li><br>
+			<li>Personal Website : Portfolio</li><br>
+			<li>Knowledge sharing</li><br>
+		</ul>
+	</section>
+
+	<section><h2>Serval Project</h2>
+		<blockquote>Communications should not just be for the geographically, financially otherwise fortunate — for it is the unfortunate who need it most.</blockquote>
+	</section>
+	<section><h2>Serval Project</h2><br>
+		<ol>
+			<li>Communicate anytime</li><br>
+			<li>Communicate anywhere</li><br>
+			<li>Communicate privately</li><br>
+			<li>Communicate with people</li><br>
+		</ol>
+	</section>
+	<section><h2>Batphone for Android</h2>
+		<img data-src="res/serval.jpg" height=500>
+		<img data-src="res/serval2.jpg" height=500>
+		<img data-src="res/serval3.png" height=500>
+	</section>
+
+	<section><h2>Rumble</h2><br>
+		<img data-src="res/rumble.png" height=500>
+		<img data-src="res/rumble1.png" height=500>
+		<img data-src="res/rumble2.png" height=500>
+	</section>
+	<section><h2>Rumble</h2><br>
+		<ul>
+			<li>Decentralized and delay-tolerant twitter-like mobile application</li><br>
+			<li>Enables the spread of messages in an epidemic fashion using automatically formed and opportunistic local ad-hoc network</li><br>
+			<li>Every message sent or received with are stored on the local database and pushed to every other device it meets</li> <br>
+			<li>Messages naturally propagates throughout the network using social links as the underlying infrastructure</li><br>
+		</ul>
+</section>
+		<section><h2>Briar Project</h2>
+			<img data-src="res/briar1.png" height=200>
+			<small>Typical messaging software relies on central servers and exposes messages and relationships to surveillance</small>
+			<img data-src="res/briar.png" height=200>
+			<small>Direct, encrypted connections between users to prevent surveillance and censorship</small> 
+		</section>
+
+		<section><h2>Briar Project</h2><br>
+			<ul>
+				<li>Peer-to-peer encrypted messaging and forums</li><br>
+				<li>Messages are stored securely on your device, not in the cloud</li><br>
+				<li>Connect directly with nearby contacts - no Internet access required</li><br>
+				<li>Free and open source software</li><br>
+				<li>Designed for activists, journalists, and anyone else who needs a safe, easy and robust way to communicate</li><br>
+			</ul>
+		</section>
+
+		<section><h2>Open Tracker</h2>
+			<img data-src="res/opentracker.png" height=300>
+			<p>opentracker is a open and free bittorrent tracker project.</p> 
+			<p>It aims for minimal resource usage and is intended to run at your wlan router.</p> 
+		</section>
+
+		<section><h2>Open Tracker</h2>
+			<p>A torrent tracker basically is an http-Server that collects all clients ip addresses into pools sorted by one of the request strings parameters and answers all other clients that specified this exact same parameter a list of all other recent clients.</p><br>
+<a href="https://github.com/nandub/opentracker-openwrt">OpenTracker for OpenWrt</a>
+		</section>
+
+</section>
+<!-- P2P Apps : ENDS   HERE -->
+
+<!-- Knowledge Sharing : STARTS HERE-->
+<section><h1>Knowledge Sharing</h1></section>
+
+<section>
+	<section><h2>Kiwix</h2>
+
+	</section>
+
+</section>
+<!-- Knowledge Sharing : ENDS   HERE-->
 
 			</div>
 
