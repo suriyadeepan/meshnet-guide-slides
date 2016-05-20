@@ -498,6 +498,17 @@ config interface 'lan'
 		<img data-src="res/kiwix6.png" ><br>
 		<img data-src="res/kiwix7.png">
 	</section>
+	<section><h2>Libre Digital Library</h2><a href="https://www.facebook.com/karaiglug/">Karai GLUG</a>, <a href="http://alagappauniversity.ac.in/">Alagappa University</a>
+		<blockquote>Inspired by Puducherry Community WiFi Initiative(pymesh), we would like to kick start the mesh network in Karaikudi too.</blockquote>
+	</section>
+	<section>
+		<img data-src="res/kglug/1.jpg" height=650>
+		<img data-src="res/kglug/6.jpg" height=650>
+	</section>
+	<section>
+		<img data-src="res/kglug/3.jpg" height=650>
+		<img data-src="res/kglug/5.jpg" height=650>
+	</section>
 
 
 </section>
@@ -520,8 +531,8 @@ config interface 'lan'
 				<p>A set of technologies that automatically creates a usable computer network</p>
 				<p><strong>Three Pillars of Zero Conf are</strong></p>
 				<ol>
-					<li>Addressing</li><br>
-					<li>Naming</li><br>
+					<li>Address Selection</li><br>
+					<li>Name Resolution</li><br>
 					<li>Service Discovery</li><br>
 				</ol>
 			</section>
@@ -530,51 +541,83 @@ config interface 'lan'
 				<blockquote>Do you speak my language?</blockquote>
 				<ul>
 					<li>ZeroConf is a three-layered system with Service Discovery on top of naming and addressing</li><br>
+					<li>Logical Services as primary entities on the network</li><br>
 					<li>Discovery/Advertisement of <strong>services</strong> instead of hardware/software</li><br>
-					<li>Periodic (sensible) querying for services</li><br>
-					<li>When a service is started it sends out multicast msgs</li><br>
-					<li>When a service stops its sends out multicast "good bye"</li><br>
+					<li>A new device connected to the network should learn the services available in the network rather than being manually configured by the user</li>
 				</ul>
 			</section>
-			<section><h2>Addressing</h2>
+			<section><h2>Service Discovery</h2>
 				<ul>
-					<li>Claiming an IP : ARP msgs to know if the IP is already in use</li>
-					<li>Claiming a name : mDNS (multicast DNS) : Device sends a multicast message of desired name</li>
+					<li>Periodic (sensible) querying for services</li><br>
+					<li>When a service is started it sends out multicast messages</li><br>
+					<li>When a service stops its sends out multicast "good bye"</li><br>
+					<li>Leases are given to services, if they are not renewed, the service name will not appear on the list of services on the client device</li>
 				</ul>
+			</section>
+
+
+			<section><h2>Address Selection</h2>
+				<ul>
+					<li>Claiming an IP : ARP messages to know if the IP is already in use</li><br>
+					<li><b>ARP Probe</b> : An ARP request with Sender IP as all zeros is sent with a target address that is desired by the host</li><br>
+					<li>Sender MAC address is put into the ARP req, to identify if the request is from the host itself or some other device desiring the same address</li><br>
+				</ul>
+			</section>
+
+			<section><h2>Announcement</h2>
+				<ul>
+					<li>After claiming an IP address (by querying for desired IP using ARP requests), a host announces <strong>I am 10.4.2.45</strong></li><br>
+					<li>Announcing the claim is essential to flush the old MAC-IP mapping in the neighbours' ARP cache</li><br>
+					<li>Announce the IP by sending Sender and Target addresses as same claimed address</li>
+				</ul>
+			</section>
+
+			<section><h2>Defending an IP</h2>
+				<ul>
+					<li>When the host is offline for a while it needs to claim the address again, since some other device could have claimed the address while the host is offline</li><br>
+					<li>Reply to ARP request from competitors looking to claim what is rightfully yours </li><br>
+					<li>Back off and choose a different IP in time of conflict</li>
+				</ul>
+			</section>
+
+
+			<section><h2>Name Resolution</h2>
+				<ul>
+					<li>Translate between names and IP addresses without a DNS server</li><br>
+					<li>A multi-cast DNS (mDNS) server is a distributed DNS server that exists simply because all the machines on a local subnet run a special daemon</li><br>
+					<li>Daemons running on either sides of a router can’t discover each other, so the .local domain is restricted to the local-link</li>
+				</ul>
+			</section>
+			<section><h2>How does it work?</h2>
+				<ul>
+					<li>IP multicast query message that asks the host having that name to identify itself</li><br>
+					<li>The target machine then multicasts a message that includes its IP address</li><br>
+					<li>All machines in that subnet can then use that information to update their mDNS caches</li><br>
+					<li>Devices can refer to the target computer by name, eg : <em>ping my_name.local, ssh my_name.local, ftp my_name.local</em></li>
+				</ul>
+			</section>
+			<section><h1>Implementation</h1></section>
+			<section>
+				<h3>Apple's Bonjour</h3>
+				<p>Bonjour is Apple's implementation of zero-configuration networking (zeroconf), a group of technologies that includes service discovery, address assignment, and hostname resolution. Bonjour locates devices such as printers, other computers, and the services that those devices offer on a local network using multicast Domain Name System (mDNS) service records.</p>
 			</section>
 			<section>
-AppleTalk NBP
-Logical Services as primary entities on the network
-DNS "SRV" records : displays IP and port number (advertise)
-Late binding of name to address : deals with dynamically changing port num and IP
-Type @ Zone; Zone -> third floor (location)
-Type identifies the protocol that the device speaks
-A new device connected to the network should learn the services available in the network rather than being manually configured by the user
-Leases are given to services, if they are not renewed, the service name will not appear on the list of services on the client device
-self-assigned link-local address
-192.168.1.13 : Dotted Decimal format
-NAT (Network Address Translation) router rewrite packet headers and forward packet to make it look like all packets actually originate from a single external IP
-NAT is imperfect, supports only a very few applications
-Chapter 5 : Service Discovery beyond link-local
-After claiming an IP address (by querying for desired IP using ARP requests), a host announces "I am 10.4.2.45"
-To communicate with a device "foo.local", host sends ARP request : "Who has 10.4.2.232?"
-"foo.local" replies with ARP reply "IP 10.4.2.232 is at MAC 00:kdjfkdjfkdjfkjd:dk:fj"
-ARP : Op code to distinguish between request and reply
-ARP cache
-ARP Probe : a ARP request with Sender IP as all zeros (probing to check if an IP address is in use) with a target address that is desired by the host; (Sender MAC address is put into the ARP req, to identify if the request is from the host itself or some other device desiring the same target address)
-When the host is offline for a while it needs to claim the address again, since some other device could have claimed the address while the host is offline
-Announcing the claim is essential to flush the old MAC-IP mapping in the neighbours' ARP cache
-Announce the IP by sending Sender and Target addresses as same claimed address
-Defending an IP : Reply to ARP request from competitors looking to claim what is rightfully yours by birth. Note : Stannis "The Mannis" Baratheon is the One True King. 
-The impostor responds with a TCP reset for services it cannot offer 
-mdnsd : mDNS Responder in linux
-The result of a successful DNS query gives you the DNS resource record associated with the requested name, type, and class
-Resource record, rrtype, rrclass, rdata
-Once you have setup a name, devices on the local link can refer to your computer by the name my_name.local. This name can be used anywhere a normal DNS hostname would be used such as on the command line (for example, ping my_name.local, ssh my_name.local, ftp my_name.local), in FTP clients, or in a web browser
-On-Demand DNS
+				<h3>Avahi</h3>
+						<p>Avahi is a system which facilitates service discovery on a local network via the mDNS/DNS-SD protocol suite. This enables you to plug your laptop or computer into a network and instantly be able to view other people who you can chat with, find printers to print to or find files being shared.</p>
+			</section>
+
+</section>
+
+<!-- Zeronet : Decentralization and Security STARTS HERE -->
+<section><h1>Zeronet</h1><h3>Encryption and Decentralization</h3></section>
+<section>
+
+	<section><h2>What is Zeronet?</h2>
+
 	</section>
 
 </section>
+<!-- Zeronet : Decentralization and Security ENDS   HERE -->
 
 			</div>
 
