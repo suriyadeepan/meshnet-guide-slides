@@ -503,6 +503,79 @@ config interface 'lan'
 </section>
 <!-- Knowledge Sharing : ENDS   HERE-->
 
+
+
+<!-- Zero Configuration : STARTS   HERE-->
+<section><h1>Zero Conf</h1></section>
+<!-- Zero Configuration : ENDS     HERE-->
+<section>
+	<section><h2>Motivation</h2>
+		<p>In the current model of Internet, or any large network, both providing a service and connecting to a service are unnecessarily complicated.</p>
+		<p>To make a service visible, one needs to register a name as proxy to the service (IP + PORT).</p> 
+		<p>To find a needed service, one needs support from a centralized DNS server.</p>
+		<p><b>This is where zeroconf comes in.</b></p> 		
+			</section>
+
+			<section><h2>Pillars of Zero Conf</h2>
+				<p>A set of technologies that automatically creates a usable computer network</p>
+				<p><strong>Three Pillars of Zero Conf are</strong></p>
+				<ol>
+					<li>Addressing</li><br>
+					<li>Naming</li><br>
+					<li>Service Discovery</li><br>
+				</ol>
+			</section>
+
+			<section><h2>Service Discovery</h2>
+				<blockquote>Do you speak my language?</blockquote>
+				<ul>
+					<li>ZeroConf is a three-layered system with Service Discovery on top of naming and addressing</li><br>
+					<li>Discovery/Advertisement of <strong>services</strong> instead of hardware/software</li><br>
+					<li>Periodic (sensible) querying for services</li><br>
+					<li>When a service is started it sends out multicast msgs</li><br>
+					<li>When a service stops its sends out multicast "good bye"</li><br>
+				</ul>
+			</section>
+			<section><h2>Addressing</h2>
+				<ul>
+					<li>Claiming an IP : ARP msgs to know if the IP is already in use</li>
+					<li>Claiming a name : mDNS (multicast DNS) : Device sends a multicast message of desired name</li>
+				</ul>
+			</section>
+			<section>
+AppleTalk NBP
+Logical Services as primary entities on the network
+DNS "SRV" records : displays IP and port number (advertise)
+Late binding of name to address : deals with dynamically changing port num and IP
+Type @ Zone; Zone -> third floor (location)
+Type identifies the protocol that the device speaks
+A new device connected to the network should learn the services available in the network rather than being manually configured by the user
+Leases are given to services, if they are not renewed, the service name will not appear on the list of services on the client device
+self-assigned link-local address
+192.168.1.13 : Dotted Decimal format
+NAT (Network Address Translation) router rewrite packet headers and forward packet to make it look like all packets actually originate from a single external IP
+NAT is imperfect, supports only a very few applications
+Chapter 5 : Service Discovery beyond link-local
+After claiming an IP address (by querying for desired IP using ARP requests), a host announces "I am 10.4.2.45"
+To communicate with a device "foo.local", host sends ARP request : "Who has 10.4.2.232?"
+"foo.local" replies with ARP reply "IP 10.4.2.232 is at MAC 00:kdjfkdjfkdjfkjd:dk:fj"
+ARP : Op code to distinguish between request and reply
+ARP cache
+ARP Probe : a ARP request with Sender IP as all zeros (probing to check if an IP address is in use) with a target address that is desired by the host; (Sender MAC address is put into the ARP req, to identify if the request is from the host itself or some other device desiring the same target address)
+When the host is offline for a while it needs to claim the address again, since some other device could have claimed the address while the host is offline
+Announcing the claim is essential to flush the old MAC-IP mapping in the neighbours' ARP cache
+Announce the IP by sending Sender and Target addresses as same claimed address
+Defending an IP : Reply to ARP request from competitors looking to claim what is rightfully yours by birth. Note : Stannis "The Mannis" Baratheon is the One True King. 
+The impostor responds with a TCP reset for services it cannot offer 
+mdnsd : mDNS Responder in linux
+The result of a successful DNS query gives you the DNS resource record associated with the requested name, type, and class
+Resource record, rrtype, rrclass, rdata
+Once you have setup a name, devices on the local link can refer to your computer by the name my_name.local. This name can be used anywhere a normal DNS hostname would be used such as on the command line (for example, ping my_name.local, ssh my_name.local, ftp my_name.local), in FTP clients, or in a web browser
+On-Demand DNS
+	</section>
+
+</section>
+
 			</div>
 
 		</div>
